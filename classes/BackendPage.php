@@ -1,6 +1,8 @@
-<?php namespace October\Core\Tests\Browser\Pages;
+<?php namespace RainLab\Dusk\Classes;
 
-abstract class BackendPage extends Page
+use Laravel\Dusk\Page as BasePage;
+
+abstract class BackendPage extends BasePage
 {
     /**
      * Get the global element shortcuts for the site.

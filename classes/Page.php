@@ -1,4 +1,4 @@
-<?php namespace October\Core\Tests\Browser\Pages;
+<?php namespace RainLab\Dusk\Classes;
 
 use Laravel\Dusk\Page as BasePage;
 
