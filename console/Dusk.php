@@ -93,10 +93,10 @@ class Dusk extends BaseDuskCommand
      */
     protected function setupDuskEnvironment()
     {
-        if (file_exists(base_path($this->duskFile()))) {
+        if (file_exists($this->duskFile())) {
             if (!file_exists(base_path('.env'))) {
                 $this->stubEnvironment();
-            } elseif (file_get_contents(base_path('.env')) !== file_get_contents(base_path($this->duskFile()))) {
+            } elseif (file_get_contents(base_path('.env')) !== file_get_contents($this->duskFile())) {
                 $this->backupEnvironment();
             }
             $this->refreshEnvironment();
@@ -116,7 +116,7 @@ class Dusk extends BaseDuskCommand
         $this->removeConfiguration();
 
         if (
-            file_exists(base_path($this->duskFile()))
+            file_exists($this->duskFile())
             && (file_exists(base_path('.env.backup')) || file_exists(base_path('.env.blank')))
         ) {
             $this->restoreEnvironment();
@@ -132,7 +132,7 @@ class Dusk extends BaseDuskCommand
     protected function stubEnvironment()
     {
         touch(base_path('.env.blank'));
-        copy(base_path($this->duskFile()), base_path('.env'));
+        copy($this->duskFile(), base_path('.env'));
     }
 
     /**
@@ -143,7 +143,7 @@ class Dusk extends BaseDuskCommand
     protected function backupEnvironment()
     {
         copy(base_path('.env'), base_path('.env.backup'));
-        copy(base_path($this->duskFile()), base_path('.env'));
+        copy($this->duskFile(), base_path('.env'));
     }
 
     /**
