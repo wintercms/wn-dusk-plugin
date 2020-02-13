@@ -1,17 +1,15 @@
 <?php namespace RainLab\Dusk\Classes;
 
+use Config;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as DuskTestCase;
-use October\Core\Tests\Browser\Pages\Backend\Dashboard;
-use October\Core\Tests\Browser\Pages\Backend\Login;
 
 abstract class BrowserTestCase extends DuskTestCase
 {
     use \RainLab\Dusk\Concerns\CreatesApplication;
-    use \RainLab\Dusk\Concerns\InteractsWithAuthentication;
     use \RainLab\Dusk\Concerns\RunsMigrations;
     use \RainLab\Dusk\Concerns\TestsPlugins;
 
@@ -65,9 +63,18 @@ abstract class BrowserTestCase extends DuskTestCase
         // Disable mailer
         \Mail::pretend();
 
+        $screenshotDir = Config::get('rainlab.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
+        $consoleDir = Config::get('rainlab.dusk::dusk.consolePath', storage_path('dusk/console'));
+        if (!is_dir($screenshotDir)) {
+            mkdir($screenshotDir, 0777, true);
+        }
+        if (!is_dir($consoleDir)) {
+            mkdir($consoleDir, 0777, true);
+        }
+
         Browser::$baseUrl = $this->baseUrl();
-        Browser::$storeScreenshotsAt = base_path('tests/Browser/screenshots');
-        Browser::$storeConsoleLogAt = base_path('tests/Browser/console');
+        Browser::$storeScreenshotsAt = $screenshotDir;
+        Browser::$storeConsoleLogAt = $consoleDir;
         Browser::$userResolver = function () {
             return $this->user();
         };
@@ -91,27 +98,6 @@ abstract class BrowserTestCase extends DuskTestCase
      */
     protected function setupMacros()
     {
-        /**
-         * Signs the user into the backend
-         */
-        Browser::macro('signInToBackend', function (string $username = null, string $password = null) {
-            $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
-            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin1234');
-
-            $this
-                ->visit(new Login)
-                ->pause(500)
-                ->type('@loginField', $username)
-                ->type('@passwordField', $password)
-                ->click('@submitButton');
-
-            $this->
-                on(new Dashboard);
-
-            return $this;
-        });
-
-
         Browser::macro('hasClass', function (string $selector, string $class) {
             $classes = preg_split('/\s+/', $this->attribute($selector, 'class'), -1, PREG_SPLIT_NO_EMPTY);
 
@@ -124,20 +110,12 @@ abstract class BrowserTestCase extends DuskTestCase
     }
 
     /**
-     * Similar to the native getConfirmation() function
+     * Return the default user to authenticate.
+     *
+     * @return \Backend\Models\User
      */
-    protected function getSweetConfirmation($expectedText = null, $clickOk = true)
+    protected function user()
     {
-        $this->waitForElementPresent("xpath=(//div[@class='sweet-alert showSweetAlert visible'])[1]");
-
-        if ($expectedText) {
-            $this->verifyText("//div[@class='sweet-alert showSweetAlert visible']//h4", $expectedText);
-        }
-
-        $this->verifyText("//div[@class='sweet-alert showSweetAlert visible']//button[@class='confirm btn btn-primary']", "OK");
-
-        if ($clickOk) {
-            $this->click("xpath=(//div[@class='sweet-alert showSweetAlert visible']//button[@class='confirm btn btn-primary'])[1]");
-        }
+        return \Backend\Models\User::where('login', 'admin')->first();
     }
 }

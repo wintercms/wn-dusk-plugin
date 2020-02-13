@@ -1,5 +1,6 @@
 <?php namespace RainLab\Dusk;
 
+use Route;
 use Illuminate\Support\ServiceProvider as ServiceProviderBase;
 
 class ServiceProvider extends ServiceProviderBase
@@ -16,7 +17,30 @@ class ServiceProvider extends ServiceProviderBase
      */
     public function boot()
     {
+        $this->registerRoutes();
         $this->registerConsoleCommands();
+    }
+
+    /**
+     * Register helper routes for handling authentication.
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        Route::get('/_dusk/login/{userId}/{manager?}', [
+            'middleware' => 'web',
+            'uses' => '\RainLab\Dusk\Controllers\UserController@login',
+        ]);
+
+        Route::get('/_dusk/logout/{manager?}', [
+            'middleware' => 'web',
+            'uses' => '\RainLab\Dusk\Controllers\UserController@logout',
+        ]);
+
+        Route::get('/_dusk/user/{manager?}', [
+            'middleware' => 'web',
+            'uses' => '\RainLab\Dusk\Controllers\UserController@user',
+        ]);
     }
 
     /**

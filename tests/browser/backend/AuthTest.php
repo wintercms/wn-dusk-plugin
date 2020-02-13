@@ -1,16 +1,28 @@
-<?php namespace October\Core\Tests\Browser\Backend;
+<?php namespace RainLab\Dusk\Tests\Browser\Backend;
 
 use Laravel\Dusk\Browser;
-use October\Core\Tests\Browser\Pages\Backend\ForgotPassword;
-use October\Core\Tests\Browser\Pages\Backend\Login;
+use RainLab\Dusk\Classes\BrowserTestCase;
+use RainLab\Dusk\Tests\Pages\Backend\Dashboard;
+use RainLab\Dusk\Tests\Pages\Backend\ForgotPassword;
+use RainLab\Dusk\Tests\Pages\Backend\Login;
 
-class AuthTest extends \October\Core\Tests\BrowserTestCase
+class AuthTest extends BrowserTestCase
 {
     public function testSignInAndOut()
     {
         $this->browse(function (Browser $browser) {
+            $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
+            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin1234');
+
             $browser
-                ->signInToBackend()
+                ->visit(new Login)
+                ->pause(500)
+                ->type('@loginField', $username)
+                ->type('@passwordField', $password)
+                ->click('@submitButton');
+
+            $browser
+                ->on(new Dashboard)
                 ->click('@accountMenu')
                 ->clickLink('Sign out');
 

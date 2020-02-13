@@ -1,7 +1,7 @@
-<?php namespace October\Core\Tests\Browser\Pages\Backend;
+<?php namespace RainLab\Dusk\Tests\Pages\Backend;
 
 use Laravel\Dusk\Browser;
-use October\Core\Tests\Browser\Pages\BackendPage;
+use RainLab\Dusk\Classes\BackendPage;
 
 class Dashboard extends BackendPage
 {

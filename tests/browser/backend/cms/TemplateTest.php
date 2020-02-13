@@ -1,15 +1,16 @@
-<?php namespace October\Core\Tests\Browser\Backend\Cms;
+<?php namespace RainLab\Dusk\Tests\Browser\Backend\Cms;
 
 use Laravel\Dusk\Browser;
-use October\Core\Tests\Browser\Pages\Backend\Cms;
+use RainLab\Dusk\Classes\BrowserTestCase;
+use RainLab\Dusk\Tests\Pages\Backend\Cms;
 
-class TemplateTest extends \October\Core\Tests\BrowserTestCase
+class TemplateTest extends BrowserTestCase
 {
     public function testPageTemplates()
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->signInToBackend()
+                ->login()
                 ->visit(new Cms)
                 ->pause(200);
 
@@ -91,7 +92,7 @@ class TemplateTest extends \October\Core\Tests\BrowserTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->signInToBackend()
+                ->login()
                 ->visit(new Cms)
                 ->pause(200);
 
@@ -162,7 +163,7 @@ class TemplateTest extends \October\Core\Tests\BrowserTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->signInToBackend()
+                ->login()
                 ->visit(new Cms)
                 ->pause(200);
 
@@ -233,7 +234,7 @@ class TemplateTest extends \October\Core\Tests\BrowserTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->signInToBackend()
+                ->login()
                 ->visit(new Cms)
                 ->pause(200);
 
