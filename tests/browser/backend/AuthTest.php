@@ -12,7 +12,7 @@ class AuthTest extends BrowserTestCase
     {
         $this->browse(function (Browser $browser) {
             $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
-            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin1234');
+            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin');
 
             $browser
                 ->visit(new Login)
