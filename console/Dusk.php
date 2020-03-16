@@ -27,6 +27,11 @@ class Dusk extends BaseDuskCommand
     protected $plugins = [];
 
     /**
+     * @var bool Is the Dusk configuration directory stubbed?
+     */
+    protected $stubbedConfigDir = false;
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -99,6 +104,10 @@ class Dusk extends BaseDuskCommand
             } elseif (file_get_contents(base_path('.env')) !== file_get_contents($this->duskFile())) {
                 $this->backupEnvironment();
             }
+            if (!is_dir(base_path('config/dusk'))) {
+                $this->stubConfigDir();
+                $this->stubbedConfigDir = true;
+            }
             $this->refreshEnvironment();
         }
 
@@ -114,6 +123,7 @@ class Dusk extends BaseDuskCommand
     protected function teardownDuskEnviroment()
     {
         $this->removeConfiguration();
+        $this->removeConfigDir();
 
         if (
             file_exists($this->duskFile())
@@ -122,7 +132,6 @@ class Dusk extends BaseDuskCommand
             $this->restoreEnvironment();
         }
     }
-
 
     /**
      * Stub a current environment file.
@@ -133,6 +142,23 @@ class Dusk extends BaseDuskCommand
     {
         touch(base_path('.env.blank'));
         copy($this->duskFile(), base_path('.env'));
+    }
+
+    /**
+     * Stub configuration directory and files for Dusk.
+     *
+     * Emulates running the `october:env` console command.
+     *
+     * @return void
+     */
+    protected function stubConfigDir()
+    {
+        mkdir(base_path('config/dusk'), 0755, true);
+
+        foreach (glob(plugins_path('rainlab/dusk/stubs/config/dusk/*.php')) as $file) {
+            $path = pathinfo($file);
+            copy($file, base_path('config/dusk/' . $path['basename']));
+        }
     }
 
     /**
@@ -209,6 +235,24 @@ class Dusk extends BaseDuskCommand
         if (! $this->hasPhpUnitConfiguration && file_exists($file = base_path('phpunit.dusk.xml'))) {
             unlink($file);
         }
+    }
+
+    /**
+     * Remove the stubbed Dusk configuration directory if needed.
+     *
+     * @return void
+     */
+    protected function removeConfigDir()
+    {
+        if (!$this->stubbedConfigDir || !is_dir(base_path('config/dusk'))) {
+            return;
+        }
+
+        foreach (glob(base_path('config/dusk/*.php')) as $file) {
+            unlink($file);
+        }
+
+        rmdir(base_path('config/dusk'));
     }
 
     /**
