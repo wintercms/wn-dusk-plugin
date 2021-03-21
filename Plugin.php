@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk;
+<?php namespace Winter\Dusk;
 
 use App;
 use System\Classes\PluginBase;
@@ -13,11 +13,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'rainlab.dusk::lang.plugin.name',
-            'description' => 'rainlab.dusk::lang.plugin.description',
-            'author'      => 'Ben Thomson',
+            'name'        => 'winter.dusk::lang.plugin.name',
+            'description' => 'winter.dusk::lang.plugin.description',
+            'author'      => 'Winter CMS',
             'icon'        => 'icon-wrench',
-            'homepage'    => 'https://github.com/rainlab/dusk-plugin'
+            'homepage'    => 'https://github.com/winter/wn-dusk-plugin'
         ];
     }
 

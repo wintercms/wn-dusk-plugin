@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk\Concerns;
+<?php namespace Winter\Dusk\Concerns;
 
 use Config;
 use Backend\Classes\AuthManager;

@@ -1,7 +1,7 @@
-<?php namespace RainLab\Dusk\Tests\Pages\Backend;
+<?php namespace Winter\Dusk\Tests\Pages\Backend;
 
 use Laravel\Dusk\Browser;
-use RainLab\Dusk\Classes\Page;
+use Winter\Dusk\Classes\Page;
 
 class ForgotPassword extends Page
 {

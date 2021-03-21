@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk;
+<?php namespace Winter\Dusk;
 
 use Route;
 use Illuminate\Support\ServiceProvider as ServiceProviderBase;
@@ -29,17 +29,17 @@ class ServiceProvider extends ServiceProviderBase
     {
         Route::get('/_dusk/login/{userId}/{manager?}', [
             'middleware' => 'web',
-            'uses' => '\RainLab\Dusk\Controllers\UserController@login',
+            'uses' => '\Winter\Dusk\Controllers\UserController@login',
         ]);
 
         Route::get('/_dusk/logout/{manager?}', [
             'middleware' => 'web',
-            'uses' => '\RainLab\Dusk\Controllers\UserController@logout',
+            'uses' => '\Winter\Dusk\Controllers\UserController@logout',
         ]);
 
         Route::get('/_dusk/user/{manager?}', [
             'middleware' => 'web',
-            'uses' => '\RainLab\Dusk\Controllers\UserController@user',
+            'uses' => '\Winter\Dusk\Controllers\UserController@user',
         ]);
     }
 
@@ -50,8 +50,8 @@ class ServiceProvider extends ServiceProviderBase
     protected function registerConsoleCommands()
     {
         $this->commands([
-            \RainLab\Dusk\Console\Dusk::class,
-            \RainLab\Dusk\Console\DuskFails::class,
+            \Winter\Dusk\Console\Dusk::class,
+            \Winter\Dusk\Console\DuskFails::class,
             \Laravel\Dusk\Console\ChromeDriverCommand::class,
         ]);
     }

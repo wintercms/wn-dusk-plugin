@@ -1,10 +1,10 @@
-<?php namespace RainLab\Dusk\Tests\Browser\Backend;
+<?php namespace Winter\Dusk\Tests\Browser\Backend;
 
 use Laravel\Dusk\Browser;
-use RainLab\Dusk\Classes\BrowserTestCase;
-use RainLab\Dusk\Tests\Pages\Backend\Dashboard;
-use RainLab\Dusk\Tests\Pages\Backend\ForgotPassword;
-use RainLab\Dusk\Tests\Pages\Backend\Login;
+use Winter\Dusk\Classes\BrowserTestCase;
+use Winter\Dusk\Tests\Pages\Backend\Dashboard;
+use Winter\Dusk\Tests\Pages\Backend\ForgotPassword;
+use Winter\Dusk\Tests\Pages\Backend\Login;
 
 class AuthTest extends BrowserTestCase
 {

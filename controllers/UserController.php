@@ -1,6 +1,6 @@
-<?php namespace RainLab\Dusk\Controllers;
+<?php namespace Winter\Dusk\Controllers;
 
-use October\Rain\Exception\ApplicationException;
+use Winter\Storm\Exception\ApplicationException;
 
 class UserController
 {
@@ -57,7 +57,7 @@ class UserController
     {
         switch ($manager) {
             case 'cms':
-                return \RainLab\User\Models\User::class;
+                return \Winter\User\Models\User::class;
             case 'backend':
                 return \Backend\Models\User::class;
         }
@@ -68,13 +68,13 @@ class UserController
     /**
      * Get the specific auth manager for the module.
      * @param $provider
-     * @return \October\Rain\Auth\Manager
+     * @return \Winter\Storm\Auth\Manager
      */
     protected function getManager($manager)
     {
         switch ($manager) {
             case 'cms':
-                return \RainLab\User\Classes\AuthManager::instance();
+                return \Winter\User\Classes\AuthManager::instance();
             case 'backend':
                 return \Backend\Classes\AuthManager::instance();
         }

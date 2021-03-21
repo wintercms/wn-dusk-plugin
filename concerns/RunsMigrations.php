@@ -1,14 +1,14 @@
-<?php namespace RainLab\Dusk\Concerns;
+<?php namespace Winter\Dusk\Concerns;
 
 trait RunsMigrations
 {
-    protected function runOctoberUpCommand()
+    protected function runWinterUpCommand()
     {
-        \Artisan::call('october:up');
+        \Artisan::call('winter:up');
     }
 
-    protected function runOctoberDownCommand()
+    protected function runWinterDownCommand()
     {
-        \Artisan::call('october:down --force');
+        \Artisan::call('winter:down --force');
     }
 }

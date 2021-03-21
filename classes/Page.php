@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk\Classes;
+<?php namespace Winter\Dusk\Classes;
 
 use Laravel\Dusk\Page as BasePage;
 

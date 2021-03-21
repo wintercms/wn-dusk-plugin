@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk\Concerns;
+<?php namespace Winter\Dusk\Concerns;
 
 use System\Classes\UpdateManager;
 use System\Classes\PluginManager;

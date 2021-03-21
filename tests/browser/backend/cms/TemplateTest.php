@@ -1,8 +1,8 @@
-<?php namespace RainLab\Dusk\Tests\Browser\Backend\Cms;
+<?php namespace Winter\Dusk\Tests\Browser\Backend\Cms;
 
 use Laravel\Dusk\Browser;
-use RainLab\Dusk\Classes\BrowserTestCase;
-use RainLab\Dusk\Tests\Pages\Backend\Cms;
+use Winter\Dusk\Classes\BrowserTestCase;
+use Winter\Dusk\Tests\Pages\Backend\Cms;
 
 class TemplateTest extends BrowserTestCase
 {

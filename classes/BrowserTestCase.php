@@ -1,4 +1,4 @@
-<?php namespace RainLab\Dusk\Classes;
+<?php namespace Winter\Dusk\Classes;
 
 use Config;
 use Facebook\WebDriver\Chrome\ChromeOptions;
@@ -9,9 +9,9 @@ use Laravel\Dusk\TestCase as DuskTestCase;
 
 abstract class BrowserTestCase extends DuskTestCase
 {
-    use \RainLab\Dusk\Concerns\CreatesApplication;
-    use \RainLab\Dusk\Concerns\RunsMigrations;
-    use \RainLab\Dusk\Concerns\TestsPlugins;
+    use \Winter\Dusk\Concerns\CreatesApplication;
+    use \Winter\Dusk\Concerns\RunsMigrations;
+    use \Winter\Dusk\Concerns\TestsPlugins;
 
     /**
      * Prepare for Dusk test execution.
@@ -54,7 +54,7 @@ abstract class BrowserTestCase extends DuskTestCase
 
         // Ensure system is up to date
         if ($this->usingTestDatabase) {
-            $this->runOctoberUpCommand();
+            $this->runWinterUpCommand();
         }
 
         // Detect a plugin and autoload it, if necessary
@@ -63,8 +63,8 @@ abstract class BrowserTestCase extends DuskTestCase
         // Disable mailer
         \Mail::pretend();
 
-        $screenshotDir = Config::get('rainlab.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
-        $consoleDir = Config::get('rainlab.dusk::dusk.consolePath', storage_path('dusk/console'));
+        $screenshotDir = Config::get('winter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
+        $consoleDir = Config::get('winter.dusk::dusk.consolePath', storage_path('dusk/console'));
         if (!is_dir($screenshotDir)) {
             mkdir($screenshotDir, 0777, true);
         }
@@ -92,7 +92,7 @@ abstract class BrowserTestCase extends DuskTestCase
     }
 
     /**
-     * Defines October macros for use in browser tests
+     * Defines Winter macros for use in browser tests
      *
      * @return void
      */

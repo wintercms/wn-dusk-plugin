@@ -1,8 +1,8 @@
-<?php namespace RainLab\Dusk\Console;
+<?php namespace Winter\Dusk\Console;
 
 use Config;
 use Laravel\Dusk\Console\DuskCommand as BaseDuskCommand;
-use October\Rain\Exception\ApplicationException;
+use Winter\Storm\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\ProcessSignaledException;
@@ -19,7 +19,7 @@ class Dusk extends BaseDuskCommand
     /**
      * @var string The console command description.
      */
-    protected $description = 'Run the Dusk tests for the entire application, or for a single October plugin.';
+    protected $description = 'Run the Dusk tests for the entire application, or for a single Winter plugin.';
 
     /**
      * @var array Selected plugins, and the path to their browser tests.
@@ -147,7 +147,7 @@ class Dusk extends BaseDuskCommand
     /**
      * Stub configuration directory and files for Dusk.
      *
-     * Emulates running the `october:env` console command.
+     * Emulates running the `winter:env` console command.
      *
      * @return void
      */
@@ -155,7 +155,7 @@ class Dusk extends BaseDuskCommand
     {
         mkdir(base_path('config/dusk'), 0755, true);
 
-        foreach (glob(plugins_path('rainlab/dusk/stubs/config/dusk/*.php')) as $file) {
+        foreach (glob(plugins_path('winter/dusk/stubs/config/dusk/*.php')) as $file) {
             $path = pathinfo($file);
             copy($file, base_path('config/dusk/' . $path['basename']));
         }
@@ -262,7 +262,7 @@ class Dusk extends BaseDuskCommand
      */
     protected function purgeScreenshots()
     {
-        $path = Config::get('rainlab.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
+        $path = Config::get('winter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
 
         if (!is_dir($path)) {
             return;
@@ -285,7 +285,7 @@ class Dusk extends BaseDuskCommand
      */
     protected function purgeConsoleLogs()
     {
-        $path = Config::get('rainlab.dusk::dusk.consolePath', storage_path('dusk/console'));
+        $path = Config::get('winter.dusk::dusk.consolePath', storage_path('dusk/console'));
 
         if (!is_dir($path)) {
             return;
@@ -308,7 +308,7 @@ class Dusk extends BaseDuskCommand
      */
     protected function duskPhpUnitXmlFile()
     {
-        return plugins_path('rainlab/dusk/stubs/.phpunit.dusk.xml.stub');
+        return plugins_path('winter/dusk/stubs/.phpunit.dusk.xml.stub');
     }
 
     /**
@@ -322,7 +322,7 @@ class Dusk extends BaseDuskCommand
             return $file;
         }
 
-        return plugins_path('rainlab/dusk/stubs/.env.dusk.stub');
+        return plugins_path('winter/dusk/stubs/.env.dusk.stub');
     }
 
     /**

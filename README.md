@@ -1,23 +1,23 @@
 # Dusk Plugin
 
-Integrates Laravel Dusk browser testing into October CMS, providing October CMS and plugin developers with the tools to
-run automated tests on a fully functional October CMS instance through a virtual browser.
+Integrates Laravel Dusk browser testing into Winter CMS, providing Winter CMS and plugin developers with the tools to
+run automated tests on a fully functional Winter CMS instance through a virtual browser.
 
 > **Note:** This plugin is intended to be used for development purposes only. Configured improperly, it can allow users
 > to circumvent authentication and sign in as any user. We do not recommend that this plugin be added as a dependency for your own plugin.
 
 ## Getting started
 
-To install the plugin, you may install it through the [October CMS Marketplace](https://octobercms.com/plugin/rainlab-dusk), or you may install it using Composer:
+To install the plugin, you may install it through the [Winter CMS Marketplace](https://wintercms.com/plugin/winter-dusk), or you may install it using Composer:
 
 ```bash
-composer require --dev rainlab/dusk-plugin
+composer require --dev winter/dusk-plugin
 ```
 
 Then, run the migrations to ensure the plugin is enabled:
 
 ```bash
-php artisan october:up
+php artisan winter:up
 ```
 
 To run the browser tests, you must install the Chrome web-driver and have the Google Chrome browser installed on the machine running the tests. The web-driver can be installed by running the following command:
@@ -40,7 +40,7 @@ To start the browser tests, run:
 php artisan dusk
 ```
 
-This will execute all available browser tests in all enabled plugins on your October CMS installation. If you would like to run the tests for one plugin only, you may add the plugin code as an argument:
+This will execute all available browser tests in all enabled plugins on your Winter CMS installation. If you would like to run the tests for one plugin only, you may add the plugin code as an argument:
 
 ```bash
 php artisan dusk Acme.Blog
@@ -58,14 +58,14 @@ php artisan dusk:fails
 
 The Dusk plugin makes it a breeze to create browser tests for your own plugin.
 
-Browser test classes should reside in the **tests/browser** folder of your plugin. Each test class file should ended with `Test.php` to indicate it is a class of test cases, and should extend the `RainLab\Dusk\Classes\BrowserTestCase` class.
+Browser test classes should reside in the **tests/browser** folder of your plugin. Each test class file should ended with `Test.php` to indicate it is a class of test cases, and should extend the `Winter\Dusk\Classes\BrowserTestCase` class.
 
 For example, a blog plugin may wish to create a **BlogTest.php** file with the following content:
 
 ```php
 <?php namespace Acme\Blog\Tests\Browser;
 
-use RainLab\Dusk\Classes\BrowserTestCase;
+use Winter\Dusk\Classes\BrowserTestCase;
 
 class BlogTest extends BrowserTestCase
 {
