@@ -107,6 +107,20 @@ abstract class BrowserTestCase extends DuskTestCase
 
             return in_array($class, $classes);
         });
+
+        Browser::macro('assertHasClass', function (string $selector, string $class) {
+            \PHPUnit\Framework\Assert::assertTrue(
+                $this->hasClass($selector, $class),
+                'did not see expected class "' . $class . '" for selector "' . $selector . '"'
+            );
+        });
+
+        Browser::macro('assertNotHasClass', function (string $selector, string $class) {
+            \PHPUnit\Framework\Assert::assertFalse(
+                $this->hasClass($selector, $class),
+                'saw unexpected class "' . $class . '" for selector "' . $selector . '"'
+            );
+        });
     }
 
     /**
