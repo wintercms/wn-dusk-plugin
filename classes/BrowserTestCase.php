@@ -6,6 +6,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as DuskTestCase;
+use System\Classes\PluginManager;
 
 abstract class BrowserTestCase extends DuskTestCase
 {
@@ -131,5 +132,44 @@ abstract class BrowserTestCase extends DuskTestCase
     protected function user()
     {
         return \Backend\Models\User::where('login', 'admin')->first();
+    }
+
+    /**
+     * Helper method to generate a screenshot with a contextual path.
+     *
+     * The path will be returned as "Plugin-Name\TestClass\testMethod\screenshot-name.png".
+     *
+     * @param string $screenshot
+     * @return string
+     */
+    protected function testScreenshot(string $screenshot)
+    {
+        // Find test method called
+        $method = null;
+
+        foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $step) {
+            if (preg_match('/^test/i', $step['function']) && $step['function'] !== 'testScreenshot') {
+                $method = $step;
+                break;
+            }
+        }
+
+        // If no applicable test method can be found, just return the screenshot name so a normal screenshot
+        // can be taken.
+        if (is_null($method)) {
+            return $screenshot;
+        }
+
+        $manager = PluginManager::instance();
+        $plugin = $manager->getIdentifier($manager->getNamespace($method['class']));
+        $class = last(explode('\\', $method['class']));
+        $method = $method['function'];
+
+        return implode(DIRECTORY_SEPARATOR, [
+            str_replace('.', '-', $plugin),
+            $class,
+            $method,
+            str_slug($screenshot)
+        ]);
     }
 }
