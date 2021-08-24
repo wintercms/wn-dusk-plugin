@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
     'connections' => [
         'sqlite' => [
             'driver'   => 'sqlite',
-            'database' => env('DB_DATABASE', 'storage/database.sqlite'),
+            'database' => env('DB_DATABASE', 'storage/dusk.sqlite'),
         ],
         'mysql' => [
             'driver'     => 'mysql',

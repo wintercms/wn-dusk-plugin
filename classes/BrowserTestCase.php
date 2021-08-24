@@ -115,18 +115,22 @@ abstract class BrowserTestCase extends DuskTestCase
             return in_array($class, $classes);
         });
 
-        Browser::macro('assertHasClass', function (string $selector, string $class) {
+        Browser::macro('assertHasClass', function (string $selector, string $class, string $message = '') {
             \PHPUnit\Framework\Assert::assertTrue(
                 $this->hasClass($selector, $class),
-                'did not see expected class "' . $class . '" for selector "' . $selector . '"'
+                $message ?: 'did not see expected class "' . $class . '" for selector "' . $selector . '"'
             );
+
+            return $this;
         });
 
-        Browser::macro('assertNotHasClass', function (string $selector, string $class) {
+        Browser::macro('assertNotHasClass', function (string $selector, string $class, string $message = '') {
             \PHPUnit\Framework\Assert::assertFalse(
                 $this->hasClass($selector, $class),
-                'saw unexpected class "' . $class . '" for selector "' . $selector . '"'
+                $message ?: 'saw unexpected class "' . $class . '" for selector "' . $selector . '"'
             );
+
+            return $this;
         });
     }
 
