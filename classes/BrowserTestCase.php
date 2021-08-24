@@ -56,6 +56,12 @@ abstract class BrowserTestCase extends DuskTestCase
         // Ensure system is up to date
         if ($this->usingTestDatabase) {
             $this->runWinterUpCommand();
+
+            // Ensure the default user has the specified username and password
+            $user = $this->user();
+            $user->login = env('DUSK_ADMIN_USER', 'admin');
+            $user->password = $user->password_confirmation = env('DUSK_ADMIN_PASS', 'admin');
+            $user->save();
         }
 
         // Detect a plugin and autoload it, if necessary
