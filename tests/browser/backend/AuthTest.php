@@ -17,17 +17,22 @@ class AuthTest extends BrowserTestCase
             $browser
                 ->visit(new Login)
                 ->pause(500)
+                ->screenshot($this->testScreenshot('1. On Login Page'))
                 ->type('@loginField', $username)
                 ->type('@passwordField', $password)
-                ->click('@submitButton');
+                ->click('@submitButton')
+                ->pause(250)
+                ->screenshot($this->testScreenshot('2. Submit Login'));
 
             $browser
                 ->on(new Dashboard)
+                ->screenshot($this->testScreenshot('3. After Login'))
                 ->click('@accountMenu')
                 ->clickLink('Sign out');
 
             $browser
-                ->on(new Login);
+                ->on(new Login)
+                ->screenshot($this->testScreenshot('4. After Logout'));
         });
     }
 
@@ -37,17 +42,25 @@ class AuthTest extends BrowserTestCase
             $browser
                 ->visit(new Login)
                 ->pause(500)
-                ->click('@forgotPasswordLink');
+                ->screenshot($this->testScreenshot('1. On Login Page'))
+                ->click('@forgotPasswordLink')
+                ->pause(250)
+                ->screenshot($this->testScreenshot('2. Click Password Link'));
 
             $browser
                 ->on(new ForgotPassword)
                 ->type('@loginField', 'admin')
-                ->click('@submitButton');
+                ->screenshot($this->testScreenshot('3. Type Login to Reset'))
+                ->click('@submitButton')
+                ->pause(250)
+                ->screenshot($this->testScreenshot('4. Submit Password Reset'));
 
             $browser
                 ->on(new Login)
                 ->waitFor('.flash-message')
-                ->assertSeeIn('.flash-message', 'Message sent to your email address');
+                ->pause(100)
+                ->screenshot($this->testScreenshot('5. Message Received'))
+                ->assertSeeIn('.flash-message', 'email has been sent');
         });
     }
 }
