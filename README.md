@@ -4,7 +4,7 @@ Integrates Laravel Dusk browser testing into Winter CMS, providing Winter CMS an
 run automated tests on a fully functional Winter CMS instance through a virtual browser.
 
 > **Note:** This plugin is intended to be used for development purposes only. Configured improperly, it can allow users
-> to circumvent authentication and sign in as any user. We do not recommend that this plugin be added as a dependency for your own plugin.
+> to circumvent authentication and sign in as any user. This plugin should be specified as a **development dependency** (ie. `require-dev`) only.
 
 ## Getting started
 
