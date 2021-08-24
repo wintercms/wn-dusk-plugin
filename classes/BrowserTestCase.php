@@ -146,9 +146,13 @@ abstract class BrowserTestCase extends DuskTestCase
     {
         // Find test method called
         $method = null;
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
-        foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $step) {
-            if (preg_match('/^test/i', $step['function']) && $step['function'] !== 'testScreenshot') {
+        // Ignore this method call in backtrace
+        array_shift($backtrace);
+
+        foreach ($backtrace as $step) {
+            if (preg_match('/^test/i', $step['function'])) {
                 $method = $step;
                 break;
             }
