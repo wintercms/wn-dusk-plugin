@@ -67,9 +67,6 @@ abstract class BrowserTestCase extends DuskTestCase
         // Detect a plugin and autoload it, if necessary
         $this->detectPlugin();
 
-        // Disable mailer
-        \Mail::pretend();
-
         $screenshotDir = Config::get('winter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
         $consoleDir = Config::get('winter.dusk::dusk.consolePath', storage_path('dusk/console'));
         if (!is_dir($screenshotDir)) {

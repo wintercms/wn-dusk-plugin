@@ -14,7 +14,10 @@ class Dusk extends BaseDuskCommand
     /**
      * @var string The name and signature of the console command.
      */
-    protected $signature = 'dusk {plugin?} {--without-tty : Disable output to TTY}';
+    protected $signature = 'dusk {plugin?}
+        {--browse : Open a browser instead of using headless mode}
+        {--without-tty : Disable output to TTY}
+        {--pest : Run the tests using Pest}';
 
     /**
      * @var string The console command description.
@@ -41,16 +44,18 @@ class Dusk extends BaseDuskCommand
         $this->collatePlugins();
         $this->purgeScreenshots();
         $this->purgeConsoleLogs();
+        $this->purgeSourceLogs();
 
         return $this->withDuskEnvironment(function () {
             $process = (new Process(array_merge(
-                $this->binary(), $this->phpunitArguments($this->getPHPUnitArguments())
+                $this->binary(),
+                $this->phpunitArguments($this->getPHPUnitArguments())
             )))->setTimeout(null);
 
             try {
                 $process->setTty(! $this->option('without-tty'));
             } catch (RuntimeException $e) {
-                $this->output->writeln('Warning: '.$e->getMessage());
+                $this->output->writeln('Warning: ' . $e->getMessage());
             }
 
             try {
@@ -339,6 +344,16 @@ class Dusk extends BaseDuskCommand
 
         // Strip plugin argument
         if ($this->argument('plugin')) {
+            array_shift($arguments);
+        }
+
+        // Strip "--browse"
+        if ($this->option('browse')) {
+            array_shift($arguments);
+        }
+
+        // Strip "--pest"
+        if ($this->option('pest')) {
             array_shift($arguments);
         }
 

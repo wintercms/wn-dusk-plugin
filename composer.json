@@ -23,9 +23,9 @@
         "source": "https://github.com/wintercms/wn-dusk-plugin"
     },
     "require": {
-        "php": ">=7.2",
+        "php": "^8.0",
         "composer/installers": "~1.0",
-        "laravel/dusk": "^5.9"
+        "laravel/dusk": "^7.1.1"
     },
     "extra": {
         "installer-name": "dusk"
