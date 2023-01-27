@@ -11,7 +11,7 @@ run automated tests on a fully functional Winter CMS instance through a virtual 
 To install the plugin, you may install it through the [Winter CMS Marketplace](https://wintercms.com/plugin/winter-dusk), or you may install it using Composer:
 
 ```bash
-composer require --dev winter/dusk-plugin
+composer require --dev winter/wn-dusk-plugin
 ```
 
 Then, run the migrations to ensure the plugin is enabled:
