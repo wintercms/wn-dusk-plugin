@@ -1,7 +1,10 @@
-<?php namespace Winter\Dusk;
+<?php
 
-use Route;
+namespace Winter\Dusk;
+
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as ServiceProviderBase;
+use Winter\Dusk\Controllers\UserController;
 
 class ServiceProvider extends ServiceProviderBase
 {
@@ -27,20 +30,17 @@ class ServiceProvider extends ServiceProviderBase
      */
     protected function registerRoutes()
     {
-        Route::get('/_dusk/login/{userId}/{manager?}', [
-            'middleware' => 'web',
-            'uses' => '\Winter\Dusk\Controllers\UserController@login',
-        ]);
+        Route::get('/_dusk/login/{userId}/{manager?}', [UserController::class, 'login'])
+            ->middleware('web')
+            ->name('dusk.login');
 
-        Route::get('/_dusk/logout/{manager?}', [
-            'middleware' => 'web',
-            'uses' => '\Winter\Dusk\Controllers\UserController@logout',
-        ]);
+        Route::get('/_dusk/logout/{manager?}', [UserController::class, 'logout'])
+            ->middleware('web')
+            ->name('dusk.logout');
 
-        Route::get('/_dusk/user/{manager?}', [
-            'middleware' => 'web',
-            'uses' => '\Winter\Dusk\Controllers\UserController@user',
-        ]);
+        Route::get('/_dusk/user/{manager?}', [UserController::class, 'user'])
+            ->middleware('web')
+            ->name('dusk.user');
     }
 
     /**

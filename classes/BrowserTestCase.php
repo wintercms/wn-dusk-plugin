@@ -86,6 +86,10 @@ abstract class BrowserTestCase extends DuskTestCase
             return $this->user();
         };
 
+        // Ensure named routes are picked up
+        $this->app['router']->getRoutes()->refreshNameLookups();
+        $this->app['router']->getRoutes()->refreshActionLookups();
+
         $this->setupMacros();
     }
 

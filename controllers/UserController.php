@@ -18,7 +18,7 @@ class UserController
         }
 
         return [
-            'id' => $user->id(),
+            'id' => $user->id,
             'className' => get_class($user),
         ];
     }
