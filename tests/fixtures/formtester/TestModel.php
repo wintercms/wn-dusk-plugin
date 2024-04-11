@@ -27,11 +27,19 @@ class TestModel extends \Winter\Storm\Database\Model
 
     public function filterFields($fields, $context = null)
     {
-        if (empty($fields->field_a->value)) {
-            $fields->field_b->hidden = true;
+        if (isset($fields->field_a) && isset($fields->field_b)) {
+            if ($fields->field_a->value) {
+                $fields->field_b->hidden = false;
+            } else {
+                $fields->field_b->hidden = true;
+            }
         }
-        if (empty($fields->field_b->value)) {
-            $fields->field_c->hidden = true;
+        if (isset($fields->field_b) && isset($fields->field_c)) {
+            if ($fields->field_b->value) {
+                $fields->field_c->hidden = false;
+            } else {
+                $fields->field_c->hidden = true;
+            }
         }
     }
 }
