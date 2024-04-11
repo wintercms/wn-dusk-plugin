@@ -29,5 +29,16 @@ return [
     | Defines the directory to save source code for failed Dusk tests.
     |
     */
-    'source' => storage_path('dusk/source'),
+    'sourcePath' => storage_path('dusk/source'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Form tester passthrough folder
+    |--------------------------------------------------------------------------
+    |
+    | Defines the directory to save passthrough files used during Backend form
+    | testing.
+    |
+    */
+    'formTesterPassthroughPath' => storage_path('dusk/form-tester'),
 ];

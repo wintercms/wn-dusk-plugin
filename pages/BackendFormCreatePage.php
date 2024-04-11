@@ -3,6 +3,7 @@
 namespace Winter\Dusk\Pages;
 
 use Laravel\Dusk\Browser;
+use Winter\Storm\Support\Facades\Config;
 
 class BackendFormCreatePage extends BackendPage
 {
@@ -20,23 +21,30 @@ class BackendFormCreatePage extends BackendPage
     {
         $this->formConfig = $formConfig;
 
+        $passthroughDirectory = rtrim(Config::get(
+            'winter.dusk::dusk.formTesterPassthroughPath',
+            storage_path('dusk/form-tester')
+        ), DIRECTORY_SEPARATOR);
+
         try {
-            if (!is_dir(base_path('storage/dusk/form-tester'))) {
-                mkdir(base_path('storage/dusk/form-tester'));
+            if (!is_dir($passthroughDirectory)) {
+                mkdir($passthroughDirectory);
             }
 
             do {
                 $this->passthroughFile = uniqid('', true);
-            } while (file_exists(base_path('storage/dusk/form-tester/' . $this->passthroughFile)));
+            } while (file_exists($passthroughDirectory . DIRECTORY_SEPARATOR . $this->passthroughFile));
 
             file_put_contents(
-                base_path('storage/dusk/form-tester/' . $this->passthroughFile),
+                $passthroughDirectory . DIRECTORY_SEPARATOR . $this->passthroughFile,
                 serialize([
                     'formConfig' => $formConfig
                 ])
             );
         } catch (\Throwable $ex) {
-            throw new \Exception('Unable to pass through form config to the browser. Please check your permissions');
+            throw new \Exception(
+                'Unable to pass through form config to the browser. Please check your permissions. (' . $ex->getMessage() . ')'
+            );
         }
     }
 

@@ -1,6 +1,7 @@
-<?php namespace Winter\Dusk\Console;
+<?php
 
-use Config;
+namespace Winter\Dusk\Console;
+
 use Laravel\Dusk\Console\DuskCommand as BaseDuskCommand;
 use Winter\Storm\Exception\ApplicationException;
 use System\Classes\PluginManager;
@@ -8,6 +9,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\ProcessSignaledException;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
+use Winter\Storm\Support\Facades\Config;
 
 class Dusk extends BaseDuskCommand
 {
@@ -45,6 +47,7 @@ class Dusk extends BaseDuskCommand
         $this->purgeScreenshots();
         $this->purgeConsoleLogs();
         $this->purgeSourceLogs();
+        $this->purgeFormTesterPassthroughFiles();
 
         return $this->withDuskEnvironment(function () {
             $process = (new Process(array_merge(
@@ -285,6 +288,28 @@ class Dusk extends BaseDuskCommand
             ->files()
             ->in($path)
             ->name('failure-*');
+
+        foreach ($files as $file) {
+            @unlink($file->getRealPath());
+        }
+    }
+
+    /**
+     * Purge the form tester passthrough files.
+     *
+     * @return void
+     */
+    protected function purgeFormTesterPassthroughFiles()
+    {
+        $path = Config::get('winter.dusk::dusk.formTesterPassthroughPath', storage_path('dusk/form-tester'));
+
+        if (!is_dir($path)) {
+            return;
+        }
+
+        $files = Finder::create()
+            ->files()
+            ->in($path);
 
         foreach ($files as $file) {
             @unlink($file->getRealPath());

@@ -5,10 +5,9 @@ namespace Winter\Dusk\Controllers;
 use App;
 use Backend\Behaviors\FormController;
 use Backend\Classes\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\View;
+use Winter\Storm\Support\Facades\Config;
 
 class FormTester extends Controller
 {
@@ -23,13 +22,17 @@ class FormTester extends Controller
         // Get pass-through values
         $path = explode('/', FacadesRequest::path());
         $passthroughFilename = end($path);
+        $passthroughDirectory = rtrim(Config::get(
+            'winter.dusk::dusk.formTesterPassthroughPath',
+            storage_path('dusk/form-tester')
+        ), DIRECTORY_SEPARATOR);
 
-        if (!file_exists(base_path('storage/dusk/form-tester/' . $passthroughFilename))) {
+        if (!file_exists($passthroughDirectory . DIRECTORY_SEPARATOR . $passthroughFilename)) {
             return;
         }
 
         try {
-            $config = unserialize(file_get_contents(base_path('storage/dusk/form-tester/' . $passthroughFilename)));
+            $config = unserialize(file_get_contents($passthroughDirectory . DIRECTORY_SEPARATOR . $passthroughFilename));
             if (!$config) {
                 throw new \Exception('Invalid config');
             }
