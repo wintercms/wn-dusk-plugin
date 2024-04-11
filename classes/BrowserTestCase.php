@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Classes;
+<?php
+
+namespace Winter\Dusk\Classes;
 
 use Config;
 use Facebook\WebDriver\Chrome\ChromeOptions;
@@ -133,6 +135,18 @@ abstract class BrowserTestCase extends DuskTestCase
                 $this->hasClass($selector, $class),
                 $message ?: 'saw unexpected class "' . $class . '" for selector "' . $selector . '"'
             );
+
+            return $this;
+        });
+
+        Browser::macro('withinEach', function (string $selector, callable $callback) {
+            $elementCount = count($this->elements($selector));
+
+            for ($i = 1; $i <= $elementCount; ++$i) {
+                $this->within($selector . ':nth-child(' . $i . ')', function ($browser) use ($callback) {
+                    $callback($browser);
+                });
+            }
 
             return $this;
         });
