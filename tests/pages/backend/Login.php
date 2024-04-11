@@ -1,7 +1,7 @@
 <?php namespace Winter\Dusk\Tests\Pages\Backend;
 
 use Laravel\Dusk\Browser;
-use Winter\Dusk\Classes\Page;
+use Winter\Dusk\Pages\Page;
 
 class Login extends Page
 {

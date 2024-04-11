@@ -1,8 +1,8 @@
-<?php namespace Winter\Dusk\Classes;
+<?php
 
-use Laravel\Dusk\Page as BasePage;
+namespace Winter\Dusk\Pages;
 
-abstract class BackendPage extends BasePage
+abstract class BackendPage extends Page
 {
     /**
      * Get the global element shortcuts for the site.

@@ -1,7 +1,7 @@
 <?php namespace Winter\Dusk\Tests\Pages\Backend;
 
 use Laravel\Dusk\Browser;
-use Winter\Dusk\Classes\BackendPage;
+use Winter\Dusk\Pages\BackendPage;
 
 class Dashboard extends BackendPage
 {
