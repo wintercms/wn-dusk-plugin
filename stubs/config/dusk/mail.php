@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => env('MAIL_MAILER', 'array'),
+    'default' => 'array',
     'mailers' => [
         'array' => [
             'transport' => 'array',
