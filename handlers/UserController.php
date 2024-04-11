@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Controllers;
+<?php
+
+namespace Winter\Dusk\Handlers;
 
 use Winter\Storm\Exception\ApplicationException;
 

@@ -4,7 +4,7 @@ namespace Winter\Dusk;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as ServiceProviderBase;
-use Winter\Dusk\Controllers\UserController;
+use Winter\Dusk\Handlers\UserController;
 
 class ServiceProvider extends ServiceProviderBase
 {
@@ -30,6 +30,10 @@ class ServiceProvider extends ServiceProviderBase
      */
     protected function registerRoutes()
     {
+        if (env('APP_ENV') !== 'dusk') {
+            return;
+        }
+
         Route::get('/_dusk/login/{userId}/{manager?}', [UserController::class, 'login'])
             ->middleware('web')
             ->name('dusk.login');
