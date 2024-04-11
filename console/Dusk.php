@@ -84,10 +84,18 @@ class Dusk extends BaseDuskCommand
                 throw new ApplicationException('Plugin "' . $selectedPlugin . '" is not installed or enabled.');
             }
 
-            $this->plugins[$selectedPlugin] = str_replace(base_path(), '.', $pluginManager->getPluginPath($selectedPlugin));
+            if (!is_dir($pluginManager->getPluginPath($selectedPlugin) . '/tests/browser')) {
+                throw new ApplicationException('Plugin "' . $selectedPlugin . '" does not have browser tests.');
+            }
+
+            $this->plugins[$selectedPlugin] = $pluginManager->getPluginPath($selectedPlugin);
         } else {
             foreach (array_keys($pluginManager->getPlugins()) as $plugin) {
-                $this->plugins[$plugin] = str_replace(base_path(), '.', $pluginManager->getPluginPath($plugin));
+                if (!is_dir($pluginManager->getPluginPath($plugin) . '/tests/browser')) {
+                    continue;
+                }
+
+                $this->plugins[$plugin] = $pluginManager->getPluginPath($plugin);
             }
         }
 
