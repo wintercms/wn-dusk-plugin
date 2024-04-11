@@ -1,0 +1,53 @@
+tabs:
+    stretch: true
+
+    fields:
+        id:
+            label: ID Number
+            span: auto
+            type: text
+            readonly: true
+            tab: Details
+        name:
+            label: Name
+            span: auto
+            type: text
+            tab: Details
+        description:
+            label: Description
+            span: full
+            type: text
+            tab: Details
+        is_active:
+            label: Is Active?
+            span: auto
+            type: switch
+            tab: Details
+        type:
+            label: Type
+            span: auto
+            type: balloon-selector
+            options:
+                test: Test
+                not-test: Not Test
+            tab: Details
+
+        field_a:
+            label: Field A
+            span: auto
+            type: text
+            tab: Dependency test
+
+        field_b:
+            label: Field B
+            span: auto
+            type: text
+            tab: Dependency test
+            dependsOn: field_a
+
+        field_c:
+            label: Field C
+            span: auto
+            type: text
+            tab: Dependency test
+            dependsOn: field_b

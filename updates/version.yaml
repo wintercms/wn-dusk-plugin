@@ -1,2 +1,3 @@
 1.0.0: Initial version of the Winter Dusk plugin.
 2.0.0: Added support for Winter CMS 1.2 / Laravel 9.
+2.1.0: Security release. Improved support with Laravel 9, add ability to dump HTML source in Dusk tests.

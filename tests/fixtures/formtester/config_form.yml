@@ -1,0 +1,12 @@
+name: Form Tester
+form: ~/plugins/winter/dusk/tests/fixtures/formtester/fields.yml
+modelClass: Winter\Dusk\Tests\Fixtures\FormTester\TestModel
+
+create:
+    title: New Form Tester
+
+update:
+    title: Update Form Tester
+
+preview:
+    title: Preview Form Tester
