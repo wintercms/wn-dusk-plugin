@@ -1,7 +1,10 @@
-<?php namespace Winter\Dusk\Concerns;
+<?php
 
-use Config;
+namespace Winter\Dusk\Concerns;
+
 use Backend\Classes\AuthManager;
+use Illuminate\Support\Facades\Artisan;
+use Winter\Storm\Support\Facades\Config;
 
 trait CreatesApplication
 {
@@ -92,6 +95,9 @@ trait CreatesApplication
          * Modify the plugin path away from the test context
          */
         $app->setPluginsPath(realpath(base_path() . Config::get('cms.pluginsPath')));
+
+        // Clear cache
+        Artisan::call('cache:clear');
 
         return $app;
     }

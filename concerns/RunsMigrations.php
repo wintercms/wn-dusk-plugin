@@ -1,14 +1,18 @@
-<?php namespace Winter\Dusk\Concerns;
+<?php
+
+namespace Winter\Dusk\Concerns;
+
+use Illuminate\Support\Facades\Artisan;
 
 trait RunsMigrations
 {
     protected function runWinterUpCommand()
     {
-        \Artisan::call('winter:up');
+        Artisan::call('winter:up');
     }
 
     protected function runWinterDownCommand()
     {
-        \Artisan::call('winter:down --force');
+        Artisan::call('winter:down --force');
     }
 }

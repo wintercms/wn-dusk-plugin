@@ -1,5 +1,8 @@
-<?php namespace Winter\Dusk\Concerns;
+<?php
 
+namespace Winter\Dusk\Concerns;
+
+use Illuminate\Support\Facades\Artisan;
 use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
 
@@ -103,6 +106,6 @@ trait TestsPlugins
         }
 
         // Execute the command
-        \Artisan::call('plugin:refresh', ['plugin' => $code, '--force' => true]);
+        Artisan::call('plugin:refresh', ['plugin' => $code, '--force' => true]);
     }
 }
