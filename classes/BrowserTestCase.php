@@ -69,6 +69,8 @@ abstract class BrowserTestCase extends DuskTestCase
 
         $screenshotDir = Config::get('winter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
         $consoleDir = Config::get('winter.dusk::dusk.consolePath', storage_path('dusk/console'));
+        $sourceDir = Config::get('winter.dusk::dusk.sourcePath', storage_path('dusk/source'));
+
         if (!is_dir($screenshotDir)) {
             mkdir($screenshotDir, 0777, true);
         }
@@ -79,6 +81,7 @@ abstract class BrowserTestCase extends DuskTestCase
         Browser::$baseUrl = $this->baseUrl();
         Browser::$storeScreenshotsAt = $screenshotDir;
         Browser::$storeConsoleLogAt = $consoleDir;
+        Browser::$storeSourceAt = $sourceDir;
         Browser::$userResolver = function () {
             return $this->user();
         };
