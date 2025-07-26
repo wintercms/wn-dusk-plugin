@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Elements\Components;
+<?php
+
+namespace Winter\Dusk\Elements\Components;
 
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Component as BaseComponent;

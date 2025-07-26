@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Tests\Browser\Backend\Cms;
+<?php
+
+namespace Winter\Dusk\Tests\Browser\Backend\Cms;
 
 use Laravel\Dusk\Browser;
 use Winter\Dusk\Classes\BrowserTestCase;

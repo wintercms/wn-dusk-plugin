@@ -2,7 +2,7 @@
 
 namespace Winter\Dusk\Tests\Browser\Backend;
 
-use Config;
+use Winter\Storm\Support\Facades\Config;
 use Laravel\Dusk\Browser;
 use Winter\Dusk\Classes\BrowserTestCase;
 use Winter\Dusk\Tests\Pages\Backend\Dashboard;

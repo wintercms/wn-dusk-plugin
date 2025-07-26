@@ -1,6 +1,8 @@
-<?php namespace Winter\Dusk;
+<?php
 
-use App;
+namespace Winter\Dusk;
+
+use Illuminate\Support\Facades\App;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
