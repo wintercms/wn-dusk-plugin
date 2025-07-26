@@ -23,7 +23,7 @@ jobs:
         uses: wintercms/setup-winter-action@v1
         with:
           php-version: 8.4
-          winter-ref: dev/wip-1.3
+          winter-ref: wip/1.3
           plugin-author: winter
           plugin-name: user
 
