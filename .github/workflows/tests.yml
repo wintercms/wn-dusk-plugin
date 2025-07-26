@@ -27,6 +27,13 @@ jobs:
           plugin-author: winter
           plugin-name: user
 
+      - name: Configure Winter
+        run: |
+          php artisan winter:env -q
+          php artisan key:generate -q
+          touch storage/database.sqlite
+          php artisan migrate
+
       - name: Install Chromedriver
         uses: nanasess/setup-chromedriver@v2
 
