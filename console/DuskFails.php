@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Console;
+<?php
+
+namespace Winter\Dusk\Console;
 
 class DuskFails extends Dusk
 {

@@ -1,4 +1,6 @@
-<?php namespace Winter\Dusk\Tests\Pages\Backend;
+<?php
+
+namespace Winter\Dusk\Tests\Pages\Backend;
 
 use Laravel\Dusk\Browser;
 use Winter\Dusk\Pages\BackendPage;

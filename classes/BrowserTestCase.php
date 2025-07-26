@@ -2,7 +2,7 @@
 
 namespace Winter\Dusk\Classes;
 
-use Config;
+use Winter\Storm\Support\Facades\Config;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;

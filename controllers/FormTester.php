@@ -2,7 +2,7 @@
 
 namespace Winter\Dusk\Controllers;
 
-use App;
+use Illuminate\Support\Facades\App;
 use Backend\Behaviors\FormController;
 use Backend\Classes\Controller;
 use Illuminate\Support\Facades\Request as FacadesRequest;
