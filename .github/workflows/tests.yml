@@ -28,11 +28,15 @@ jobs:
           plugin-name: user
 
       - name: Configure Winter
+        env:
+          DB_CONNECTION: "sqlite"
+          DB_DATABASE: "${{ github.workspace }}/storage/database.sqlite"
         run: |
           php artisan winter:env -q
           php artisan key:generate -q
-          touch storage/database.sqlite
+          touch ${{ github.workspace }}/storage/database.sqlite
           php artisan migrate
+          php artisan winter:passwd admin admin
 
       - name: Install Chromedriver
         uses: nanasess/setup-chromedriver@v2
